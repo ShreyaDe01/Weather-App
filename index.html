@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weather App</title>
+        
+        <!--Google Fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+        <!--icons--> 
+        <script src="https://kit.fontawesome.com/cff7ab425f.js" crossorigin="anonymous"></script>
+        <!--CSS-->
+        <link rel="stylesheet" type="text/css" href="api.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="card">
+                <h2><i class="fa fa-map-marker"></i> <span id="location"></span></h2>
+                <h6 id="weather"></h6>
+                <h4><span id="temp"></span>&deg;C</h4>
+                <img src="" alt="" id="img-icon">
+                <button class="refresh" onclick="windows.location.reload()">
+                    <i class="fa fa-refresh"></i>
+                </button>
+            </div>
+        </div>
+                
+    </body>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script>
+        link = "https://api.openweathermap.org/data/2.5/weather?q=Kolkata&appid=ed3a1280390cc876fc5c13f83b497ac0"
+        var request = new XMLHttpRequest();
+        request.open('GET', link, true);
+        request.onload = function (){
+            var obj = JSON.parse(this.response)
+            console.log(obj);
+            document.getElementById('weather').innerHTML = obj.weather[0].description;
+            document.getElementById('location').innerHTML = obj.name;
+            document.getElementById('temp').innerHTML = Math.round(obj.main.temp - 273.15);
+            document.getElementById('img-icon').src="https://openweathermap.org/img/w/" + obj.weather[0].icon +".png";      
+        }
+        if(request.status >= 200 && request.status <400){
+            var temp = obj.main.temp
+        }else{
+            console.log("The city data is not available")
+        }
+        request.send();
+    </script>
+</html>
