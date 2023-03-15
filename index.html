@@ -15,35 +15,73 @@
     <body>
         <div class="container">
             <div class="card">
-                <h2><i class="fa fa-map-marker"></i> <span id="location"></span></h2>
-                <h6 id="weather"></h6>
-                <h4><span id="temp"></span>&deg;C</h4>
-                <img src="" alt="" id="img-icon">
+                <h2><i class="fa fa-map-marker"></i> <span id="location0"></span></h2>
+                <h6 id="weather0"></h6>
+                <h4><span id="temp0"></span>&deg;C</h4>
+                <img src="" alt="" id="img-icon0">
                 <button class="refresh" onclick="windows.location.reload()">
                     <i class="fa fa-refresh"></i>
                 </button>
             </div>
         </div>
-                
+        <div class="container">
+            <div class="card">
+                <h2><i class="fa fa-map-marker"></i> <span id="location1"></span></h2>
+                <h6 id="weather1"></h6>
+                <h4><span id="temp1"></span>&deg;C</h4>
+                <img src="" alt="" id="img-icon1">
+                <button class="refresh" onclick="windows.location.reload()">
+                    <i class="fa fa-refresh"></i>
+                </button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card">
+                <h2><i class="fa fa-map-marker"></i> <span id="location2"></span></h2>
+                <h6 id="weather2"></h6>
+                <h4><span id="temp2"></span>&deg;C</h4>
+                <img src="" alt="" id="img-icon2">
+                <button class="refresh" onclick="windows.location.reload()">
+                    <i class="fa fa-refresh"></i>
+                </button>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card">
+                <h2><i class="fa fa-map-marker"></i> <span id="location3"></span></h2>
+                <h6 id="weather3"></h6>
+                <h4><span id="temp3"></span>&deg;C</h4>
+                <img src="" alt="" id="img-icon3">
+                <button class="refresh" onclick="windows.location.reload()">
+                    <i class="fa fa-refresh"></i>
+                </button>
+            </div>
+        </div>        
     </body>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script type='text/javascript' src='config.js'></script>
     <script>
-        link = "https://api.openweathermap.org/data/2.5/weather?q=Kolkata&appid=ed3a1280390cc876fc5c13f83b497ac0"
-        var request = new XMLHttpRequest();
-        request.open('GET', link, true);
-        request.onload = function (){
-            var obj = JSON.parse(this.response)
-            console.log(obj);
-            document.getElementById('weather').innerHTML = obj.weather[0].description;
-            document.getElementById('location').innerHTML = obj.name;
-            document.getElementById('temp').innerHTML = Math.round(obj.main.temp - 273.15);
-            document.getElementById('img-icon').src="https://openweathermap.org/img/w/" + obj.weather[0].icon +".png";      
-        }
-        if(request.status >= 200 && request.status <400){
-            var temp = obj.main.temp
-        }else{
-            console.log("The city data is not available")
-        }
-        request.send();
+        var key = config.API_KEY
+        cities = ['Delhi', 'Kolkata', 'Mumbai', 'Chennai']
+        cities.forEach(city => {
+            link = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+key
+            var request = new XMLHttpRequest();
+            request.open('GET', link, true);
+            request.onload = function (){
+                var obj = JSON.parse(this.response)
+                console.log(obj);
+                idx = cities.indexOf(city)
+                document.getElementById('weather'+idx).innerHTML = obj.weather[0].main;
+                document.getElementById('location'+idx).innerHTML = obj.name;
+                document.getElementById('temp'+idx).innerHTML = Math.round(obj.main.temp - 273.15);
+                document.getElementById('img-icon'+idx).src="https://openweathermap.org/img/w/" + obj.weather[0].icon +".png";      
+            }
+            if(request.status >= 200 && request.status <400){
+                var temp = obj.main.temp
+            }else{
+                console.log("The city data is not available")
+            }
+            request.send();
+        });
     </script>
 </html>
