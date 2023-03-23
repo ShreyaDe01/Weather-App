@@ -1,35 +1,49 @@
 body{
     margin: 0;
     padding: 0;
-    height: 100vh;
-    display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
     font-family: 'Merriweather', serif;
     color: white;
     background: #343434;
+    overflow: hidden;
+}
+.col-md-4:first-child{
+    margin-left: -5%;
+    margin-right: 5%;
+}
+.col-md-4:last-child{
+    margin-left: 5%;
+    margin-right: -5%;
+}
+.title{
+    text-transform: capitalize;
+    font-family: 'Alkatra', sans-serif;
 }
 
-.container{
-    width: 20%;
-    margin: 3%;
-}
 .card{
     border-radius: 50px;
     background-color: #343434;
     box-shadow: 5px 5px 10px #191b1b, -5px -5px 10px #595959;
-    padding: 3%;
+    padding: 2%;
     text-align: center;
+    margin-top: 4%;
+    width: 100%;
 }
-
+.card h2{
+    padding: 3%;
+}
 .card h4{
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 500;
     margin: 1rem 0;
+    padding: 1%;
 }
 
 .card img{
     width: 20%;
+    margin: auto;
 }
 
 .card h6{
